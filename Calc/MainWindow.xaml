@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calc"
         mc:Ignorable="d"
-        Title="Калькулятор" Height="380" Width="580">
+        Title="Калькулятор" Height="380" Width="580"
+        d:DataContext="{d:DesignInstance {x:Type local:MainViewModel}}">
     <Grid x:Name="MainBody">
 
         <Grid.RowDefinitions>
@@ -26,33 +27,33 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="Example" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <TextBlock x:Name="Error_Message" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Example, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock x:Name="Error_Message" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Error, UpdateSourceTrigger=PropertyChanged}"/>
         <ScrollViewer Grid.Row="0" Grid.Column="5" Grid.RowSpan="6">
             <StackPanel Background="Beige">
-                <TextBlock x:Name="History" Grid.Row="0" Grid.Column="5" Grid.RowSpan="6"/>
+                <TextBlock x:Name="History" Grid.Row="0" Grid.Column="5" Grid.RowSpan="6" Text="{Binding History, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Column="4" Grid.Row="6" Background="Brown">Clear History</Button>
-        <Button Grid.Column="0" Grid.Row="2">1</Button>
-        <Button Grid.Column="1" Grid.Row="2">2</Button>
-        <Button Grid.Column="2" Grid.Row="2">3</Button>
-        <Button Grid.Column="3" Grid.Row="2" Background="DimGray">+</Button>
-        <Button Grid.Column="0" Grid.Row="3">4</Button>
-        <Button Grid.Column="1" Grid.Row="3">5</Button>
-        <Button Grid.Column="2" Grid.Row="3">6</Button>
-        <Button Grid.Column="3" Grid.Row="3" Background="DimGray">-</Button>
-        <Button Grid.Column="0" Grid.Row="4">7</Button>
-        <Button Grid.Column="1" Grid.Row="4">8</Button>
-        <Button Grid.Column="2" Grid.Row="4">9</Button>
-        <Button Grid.Column="3" Grid.Row="4" Background="DimGray">*</Button>
-        <Button Grid.Column="0" Grid.Row="5">0</Button>
-        <Button Grid.Column="1" Grid.Row="5" Background="DimGray">.</Button>
-        <Button Grid.Column="2" Grid.Row="5" Background="DimGray">=</Button>
-        <Button Grid.Column="3" Grid.Row="5" Background="DimGray">/</Button>
-        <Button Grid.Column="0" Grid.Row="6" Background="DimGray">(</Button>
-        <Button Grid.Row="6" Background="DimGray" Grid.Column="1">)</Button>
-        <Button Grid.Column="2" Grid.Row="6" Background="Brown">Clear all</Button>
-        <Button Grid.Column="3" Grid.Row="6" Background="Brown">Clear entry</Button>
+        <Button Grid.Column="4" Grid.Row="6" Background="Brown" Command="{Binding ClearHistoryCommand}">Clear History</Button>
+        <Button Grid.Column="0" Grid.Row="2" Command="{Binding AddExampleCommand}" CommandParameter="1">1</Button>
+        <Button Grid.Column="1" Grid.Row="2" Command="{Binding AddExampleCommand}" CommandParameter="2">2</Button>
+        <Button Grid.Column="2" Grid.Row="2" Command="{Binding AddExampleCommand}" CommandParameter="3">3</Button>
+        <Button Grid.Column="3" Grid.Row="2" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter="+">+</Button>
+        <Button Grid.Column="0" Grid.Row="3" Command="{Binding AddExampleCommand}" CommandParameter="4">4</Button>
+        <Button Grid.Column="1" Grid.Row="3" Command="{Binding AddExampleCommand}" CommandParameter="5">5</Button>
+        <Button Grid.Column="2" Grid.Row="3" Command="{Binding AddExampleCommand}" CommandParameter="6">6</Button>
+        <Button Grid.Column="3" Grid.Row="3" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter="-">-</Button>
+        <Button Grid.Column="0" Grid.Row="4" Command="{Binding AddExampleCommand}" CommandParameter="7">7</Button>
+        <Button Grid.Column="1" Grid.Row="4" Command="{Binding AddExampleCommand}" CommandParameter="8">8</Button>
+        <Button Grid.Column="2" Grid.Row="4" Command="{Binding AddExampleCommand}" CommandParameter="9">9</Button>
+        <Button Grid.Column="3" Grid.Row="4" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter="*">*</Button>
+        <Button Grid.Column="0" Grid.Row="5" Command="{Binding AddExampleCommand}" CommandParameter="0">0</Button>
+        <Button Grid.Column="1" Grid.Row="5" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter=".">.</Button>
+        <Button Grid.Column="2" Grid.Row="5" Background="DimGray" Command="{Binding SolutionExampleCommand}">=</Button>
+        <Button Grid.Column="3" Grid.Row="5" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter="/">/</Button>
+        <Button Grid.Column="0" Grid.Row="6" Background="DimGray" Command="{Binding AddExampleCommand}" CommandParameter="(">(</Button>
+        <Button Grid.Row="6" Background="DimGray" Grid.Column="1" Command="{Binding AddExampleCommand}" CommandParameter=")">)</Button>
+        <Button Grid.Column="2" Grid.Row="6" Background="Brown" Command="{Binding DeleteExampleCommand}">Clear all</Button>
+        <Button Grid.Column="3" Grid.Row="6" Background="Brown" Command="{Binding DeleteOneExampleCommand}">Clear entry</Button>
     </Grid>
 </Window>
