@@ -12,16 +12,16 @@ namespace Calc
         public string Error;
         public string Result;
     }
-    public class MainViewModel
+    public class MainViewModel: INotifyPropertyChanged
     {
         public MainViewModel()
         {
 
             AddExampleCommand = new RelayCommand<string>((x) => AddElementToExample(x));
-            DeleteOneExampleCommand = new RelayCommand(DeleteOneExample, () => string.IsNullOrWhiteSpace(Example) == false);
-            DeleteExampleCommand = new RelayCommand(DeleteExample, () => string.IsNullOrWhiteSpace(Example) == false);
-            SolutionExampleCommand = new RelayCommand(SolutionExample, () => string.IsNullOrWhiteSpace(Example) == false);
-            ClearHistoryCommand = new RelayCommand(ClearHistory, () => string.IsNullOrWhiteSpace(History) == false);
+            DeleteOneExampleCommand = new RelayCommand(DeleteOneExample);
+            DeleteExampleCommand = new RelayCommand(DeleteExample);
+            SolutionExampleCommand = new RelayCommand(SolutionExample);
+            ClearHistoryCommand = new RelayCommand(ClearHistory);
         }
 
         private string _example;
@@ -46,7 +46,7 @@ namespace Calc
                 if (_example == value) return;
                 _example = value;
 
-                OnPropertyChanged(Example);
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +57,7 @@ namespace Calc
             {
                 if (_history == value) return;
                 _history = value;
-                OnPropertyChanged(History);
+                OnPropertyChanged();
             }
         }
 
@@ -73,12 +73,13 @@ namespace Calc
             {
                 if (_error == value) return;
                 _error = value;
-                OnPropertyChanged(Error);
+                OnPropertyChanged();
             }
         }
 
         private void AddElementToExample(string element)
         {
+            ans.Error = null;
             Error = null;
             if (!string.IsNullOrEmpty(Example))
             {
@@ -98,21 +99,24 @@ namespace Calc
         {
             if (Example.Length > 0)
             {
+                ans.Error = null;
                 Error = null;
-                Example = Example.Remove(1);
+                Example = Example.Remove(Example.Length - 1);
+
             }
         }
 
         private void DeleteExample()
         {
             Error = null;
+            ans.Error = null;
             Example = null;
         }
 
         private void SolutionExample()
         {
+            ans.Error = null;
             ans.Result = _primer.CalculWork(Example, ref ans).ToString();
-            Example = null;
             if (ans.Error == null)
             {
                 History += Example + "=" + ans.Result + "\n";
@@ -126,7 +130,7 @@ namespace Calc
 
         private void ClearHistory()
         {
-
+            History = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
