@@ -381,15 +381,6 @@
             "related": ".xml"
           }
         }
-      },
-      "WpfCalcul/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/WpfCalcul.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/WpfCalcul.dll": {}
-        }
       }
     }
   },
@@ -984,11 +975,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "WpfCalcul/1.0.0": {
-      "type": "project",
-      "path": "../../../WpfCalcul/WpfCalcul/WpfCalcul.csproj",
-      "msbuildProject": "../../../WpfCalcul/WpfCalcul/WpfCalcul.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -997,7 +983,6 @@
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.6.1",
       "NUnit3TestAdapter >= 4.4.2",
-      "WpfCalcul >= 1.0.0",
       "coverlet.collector >= 3.2.0"
     ]
   },
@@ -1033,11 +1018,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\Admin\\OneDrive\\Рабочий стол\\Учёба\\Разработка\\WpfCalcul\\WpfCalcul\\WpfCalcul.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Рабочий стол\\Учёба\\Разработка\\WpfCalcul\\WpfCalcul\\WpfCalcul.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

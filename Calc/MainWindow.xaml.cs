@@ -26,7 +26,11 @@ namespace Calc
         {
             InitializeComponent();
 
-            var mainViewModel = new MainViewModel();
+            IHistory RAM = new RAM_History();
+            IHistory DB = new DataBase();
+            IHistory File = new FileHistory();
+
+            var mainViewModel = new MainViewModel(DB);
             DataContext = mainViewModel;
         }
     }

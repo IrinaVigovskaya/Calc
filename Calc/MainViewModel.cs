@@ -4,19 +4,23 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.Input;
+using System.Data.SQLite;
 
 namespace Calc
 {
+
     public struct Result_operarion
     {
         public string Error;
         public string Result;
     }
+
     public class MainViewModel: INotifyPropertyChanged
     {
-        public MainViewModel()
+        public MainViewModel(IHistory History)
         {
 
+            _history = History;
             AddExampleCommand = new RelayCommand<string>((x) => AddElementToExample(x));
             DeleteOneExampleCommand = new RelayCommand(DeleteOneExample);
             DeleteExampleCommand = new RelayCommand(DeleteExample);
@@ -24,9 +28,12 @@ namespace Calc
             ClearHistoryCommand = new RelayCommand(ClearHistory);
         }
 
+
+        IHistory _history;
+
         private string _example;
-        private string _history;
         private string _error;
+        private string history_;
         public virtual RelayCommand<string> AddExampleCommand { get; }
         public virtual RelayCommand DeleteOneExampleCommand { get; }
         public virtual RelayCommand DeleteExampleCommand { get; }
@@ -50,22 +57,18 @@ namespace Calc
             }
         }
 
+
         public string History
         {
-            get => _history;
+            get => _history.GetHistoryData();
             set
             {
-                if (_history == value) return;
-                _history = value;
+                if (history_ == value) return;
+                history_ = value;
                 OnPropertyChanged();
             }
         }
-
-        interface IExample
-        {
-            string History_ { get; }
-        }
-
+    
         public string Error
         {
             get => _error;
@@ -75,6 +78,11 @@ namespace Calc
                 _error = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void GetHistoryData()
+        {
+            History = _history.GetHistoryData();
         }
 
         private void AddElementToExample(string element)
@@ -106,6 +114,11 @@ namespace Calc
             }
         }
 
+        private void ClearHistory()
+        {
+            History = _history.ClearHistory(History);
+        }
+
         private void DeleteExample()
         {
             Error = null;
@@ -119,7 +132,7 @@ namespace Calc
             ans.Result = _primer.CalculWork(Example, ref ans).ToString();
             if (ans.Error == null)
             {
-                History += Example + "=" + ans.Result + "\n";
+                UpdateHistoryData(Example + "=" + ans.Result + "\n");
                 Example = ans.Result;
             }
             else
@@ -128,9 +141,9 @@ namespace Calc
             }
         }
 
-        private void ClearHistory()
+        public void UpdateHistoryData(string data)
         {
-            History = null;
+            History = _history.UpdateHistoryData(History, data);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
