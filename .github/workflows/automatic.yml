@@ -1,0 +1,15 @@
+#-----------------------------------
+name: Calcul-Actions
+
+on: 
+  push:
+      branches:
+              - master
+#-----------------------------------
+
+jobs:
+    my-testing:
+              runs-on: ubunty-latest
+              steps:
+                - name: Print Hello
+                  run : echo "Hello World"
