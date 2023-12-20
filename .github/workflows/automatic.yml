@@ -4,12 +4,12 @@ name: Calcul-Actions
 on: 
   push:
       branches:
-              - master
+          - master
 #-----------------------------------
 
 jobs:
-    my-testing:
+    my_testing:
               runs-on: ubunty-latest
               steps:
-                - name: Print Hello
-                  run : echo "Hello World"
+              - name: Print Hello
+                run : echo "Hello World"
