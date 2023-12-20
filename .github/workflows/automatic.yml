@@ -9,7 +9,7 @@ on:
 
 jobs:
     my_testing:
-              runs-on: ubunty-latest
+              runs-on: ubuntu-latest
               steps:
               - name: Print Hello
                 run : echo "Hello World"
