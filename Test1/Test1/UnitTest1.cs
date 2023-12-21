@@ -76,7 +76,7 @@ namespace Test1
         [TestCase("8+11", 19)]
         [TestCase("-4", -4)]
         [TestCase("1-4", -3)]
-        [TestCase("10*2,4", 24)]
+        [TestCase("2*2,4", 4.8)]
         [TestCase("10/5", 2)]
         [TestCase("(5*4)", 20)]
         [TestCase("-(5*4)/2", -10)]
