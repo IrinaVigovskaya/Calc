@@ -72,6 +72,7 @@ namespace Test1
             Assert.AreEqual(result, -10);
         }*/
 
+        [SetCulture("ru-RU")]
         [TestCase("", 0)]
         [TestCase("8+11", 19)]
         [TestCase("-4", -4)]
